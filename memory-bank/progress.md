@@ -13,6 +13,7 @@
 - Lịch sử Fix Lỗi: Đã sửa menu/header quá nhỏ tại `src/styles.css` và icon Unicode lệch tỷ lệ tại `src/main.jsx` bằng cách tăng kích thước, bổ sung breakpoint responsive và dùng SVG inline.
 - [x] Sửa lỗi UI chữ tiếng Việt bị giãn và menu trên cùng quá nhỏ tại `src/styles.css` bằng cách chuẩn hóa spacing/text-align, giới hạn tiêu đề và tăng kích thước menu theo breakpoint.
 - [x] Lịch sử Fix Lỗi: Đã sửa lỗi font tiếng Việt bị tách dấu tại banner chính bằng cách thêm Google Fonts `Be Vietnam Pro` vào `index.html` và thay các fallback `Georgia`/`Inter` trong `src/styles.css`.
+- [x] Lịch sử Fix Lỗi: Đã bổ sung đường dẫn quay lại trang chủ trong menu và footer tại `src/main.jsx` bằng React Router `Link` trỏ về `/`.
 
 ## Nhiệm vụ tiếp theo / Việc cần làm (Future Tasks)
 - Bổ sung kiểm thử E2E nếu dự án cần tự động hóa kiểm tra giao diện.

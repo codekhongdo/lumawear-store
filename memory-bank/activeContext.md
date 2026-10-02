@@ -4,3 +4,4 @@
 - Đã sửa lỗi UI chữ tiếng Việt bị giãn và menu trên cùng quá nhỏ tại `src/styles.css`: chuẩn hóa spacing/text-align, giới hạn chiều rộng tiêu đề và tăng kích thước menu theo breakpoint.
 - Đã sửa lỗi font tiếng Việt tại banner chính bằng cách tải `Be Vietnam Pro` từ Google Fonts trong `index.html` và áp dụng thống nhất cho toàn bộ typography trong `src/styles.css`.
 - Đã kiểm tra desktop tại `http://127.0.0.1:5174/`; responsive có breakpoint cho tablet/mobile.
+- Đã bổ sung liên kết `Trang chủ` trong menu và liên kết logo footer về `/` để người dùng luôn quay lại trang chủ từ các trang phụ.
