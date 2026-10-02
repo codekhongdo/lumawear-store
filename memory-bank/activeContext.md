@@ -5,4 +5,5 @@
 - Đã sửa lỗi font tiếng Việt tại banner chính bằng cách tải `Be Vietnam Pro` từ Google Fonts trong `index.html` và áp dụng thống nhất cho toàn bộ typography trong `src/styles.css`.
 - Đã kiểm tra desktop tại `http://127.0.0.1:5174/`; responsive có breakpoint cho tablet/mobile.
 - Đã bổ sung liên kết `Trang chủ` trong menu và liên kết logo footer về `/` để người dùng luôn quay lại trang chủ từ các trang phụ.
-- Lịch sử Fix Lỗi: Đã sửa lỗi deploy GitHub Pages hiển thị trắng do thiếu Base Path của Vite tại `vite.config.js` bằng `base: '/lumawear-store/'`; production build đã thành công và asset trong `dist/index.html` dùng đúng prefix repository. Bản sửa được commit/push để kích hoạt GitHub Actions.
+- Lịch sử Fix Lỗi: Đã sửa lỗi deploy GitHub Pages hiển thị trắng do thiếu Base Path của Vite tại `vite.config.js` bằng `base: '/lumawear-store/'`; production build đã thành công và asset trong `dist/index.html` dùng đúng prefix repository.
+- Lịch sử Fix Lỗi: GitHub Pages không hiển thị UI vì repository chưa có workflow build/deploy; đã tạo `.github/workflows/deploy.yml` để build và deploy `dist`, đồng thời đổi `BrowserRouter` sang `HashRouter` trong `src/main.jsx` để route SPA hoạt động ổn định trên Pages.

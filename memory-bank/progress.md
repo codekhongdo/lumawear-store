@@ -17,5 +17,8 @@
 
 - [x] Sửa lỗi deploy GitHub Pages hiển thị trang trắng tại `vite.config.js` bằng cách bổ sung `base: '/lumawear-store/'` để asset production dùng đúng đường dẫn repository.
 - [x] Chạy lại production build thành công và xác nhận asset dùng prefix `/lumawear-store/`; commit/push bản sửa lên GitHub để kích hoạt GitHub Actions.
+- [x] Tạo GitHub Actions workflow build/deploy thư mục `dist` lên GitHub Pages.
+- [x] Đổi `BrowserRouter` sang `HashRouter` để route SPA hoạt động ổn định trên GitHub Pages.
+- Lịch sử Fix Lỗi: GitHub Pages không có UI vì repository thiếu workflow deploy; đã tạo `.github/workflows/deploy.yml` và đổi router sang `HashRouter`. Production build đã thành công.
 ## Nhiệm vụ tiếp theo / Việc cần làm (Future Tasks)
 - Bổ sung kiểm thử E2E nếu dự án cần tự động hóa kiểm tra giao diện.
