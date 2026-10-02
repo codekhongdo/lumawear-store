@@ -15,5 +15,7 @@
 - [x] Lịch sử Fix Lỗi: Đã sửa lỗi font tiếng Việt bị tách dấu tại banner chính bằng cách thêm Google Fonts `Be Vietnam Pro` vào `index.html` và thay các fallback `Georgia`/`Inter` trong `src/styles.css`.
 - [x] Lịch sử Fix Lỗi: Đã bổ sung đường dẫn quay lại trang chủ trong menu và footer tại `src/main.jsx` bằng React Router `Link` trỏ về `/`.
 
+- [x] Sửa lỗi deploy GitHub Pages hiển thị trang trắng tại `vite.config.js` bằng cách bổ sung `base: '/lumawear-store/'` để asset production dùng đúng đường dẫn repository.
+- [x] Chạy lại production build thành công và xác nhận asset dùng prefix `/lumawear-store/`; commit/push bản sửa lên GitHub để kích hoạt GitHub Actions.
 ## Nhiệm vụ tiếp theo / Việc cần làm (Future Tasks)
 - Bổ sung kiểm thử E2E nếu dự án cần tự động hóa kiểm tra giao diện.
