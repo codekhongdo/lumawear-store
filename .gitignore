@@ -7,6 +7,6 @@ dist/
 .vscode/
 .clinerules
 memory-bank/
-implementation_plans.md
+implementation_plan.md
 .pytest_cache/
-pycache/
+__pycache__/
