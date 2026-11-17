@@ -8,3 +8,4 @@ dist/
 .clinerules
 memory-bank/
 implementation_plans.md
+.pytest_cache/
