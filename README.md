@@ -121,6 +121,19 @@ base: '/lumawear-store/'
 
 Để bật Pages trong repository, vào **Settings → Pages → Source** và chọn **GitHub Actions**.
 
+## Backend FastAPI + PostgreSQL local
+
+Backend nằm trong `backend/`, cung cấp CRUD sản phẩm tại `http://127.0.0.1:8000/api/products`. Cài PostgreSQL, tạo database `lumawear`, sao chép `backend/.env.example` thành `backend/.env`, rồi chạy:
+
+```powershell
+python -m venv backend\.venv
+backend\.venv\Scripts\python.exe -m pip install -r backend\requirements.txt
+backend\.venv\Scripts\python.exe backend\seed.py
+backend\.venv\Scripts\python.exe -m uvicorn app.main:app --app-dir backend --reload --port 8000
+```
+
+Frontend đọc URL API từ `VITE_API_URL` và mặc định dùng `http://127.0.0.1:8000/api`. Swagger: `http://127.0.0.1:8000/docs`.
+
 ## Lưu ý
 
 - Đây là frontend demo, chưa có backend hoặc cơ sở dữ liệu.
