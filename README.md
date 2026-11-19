@@ -1,146 +1,33 @@
-# LumaWear Store
+# LumaWear Store — Design System & Design Patterns Edition
 
-Website bán thời trang frontend-only được xây dựng với React và Vite. LumaWear cung cấp trải nghiệm mua sắm hiện đại với các danh mục quần áo, váy, phụ kiện và mũ.
+Website thương mại điện tử thời trang **LumaWear Store** (React + Vite + FastAPI) được tái cấu trúc toàn diện theo **Design System** chuẩn hóa bằng CSS Tokens + UI Primitives và các **Design Patterns** phổ biến trong kỹ thuật phần mềm Frontend.
 
-## Demo trực tuyến
+## Kiến trúc Design System
 
-**Website:** [https://codekhongdo.github.io/lumawear-store/](https://codekhongdo.github.io/lumawear-store/)
+- **`src/styles/tokens.css`**: Hệ thống Design Tokens phân tầng (Primitive → Semantic) cho bảng màu Editorial (`#FFFFFF`, `#F8F7F4`, `#111111`, `#B89B72`, `#9A7B56`), typography (*Cormorant Garamond* + *Be Vietnam Pro*), thang spacing, bán kính bo góc, z-index và motion.
+- **`src/styles/base.css`**: Reset chuẩn hóa, hỗ trợ keyboard focus (`:focus-visible`) và `prefers-reduced-motion`.
+- **`src/styles/primitives.css` & `src/components/ui/`**: Thư viện UI Primitives tái sử dụng (`Button`, `IconButton`, `Badge`, `Field`, `Drawer`, `Modal`, `EmptyState`, `PriceDisplay`, `QuantityStepper`, `SwatchPicker`, `ToastViewport`, `Icons`).
 
-## Tính năng
+## Các Design Patterns áp dụng
 
-- Trang chủ với banner, danh mục và sản phẩm nổi bật.
-- Danh sách sản phẩm.
-- Tìm kiếm và lọc sản phẩm theo danh mục.
-- Sắp xếp sản phẩm mới và sản phẩm khuyến mãi.
-- Trang chi tiết sản phẩm.
-- Thêm, tăng, giảm và xóa sản phẩm trong giỏ hàng.
-- Lưu giỏ hàng bằng `localStorage`.
-- Checkout mô phỏng với phương thức thanh toán khi nhận hàng (COD).
-- Trang tài khoản và lịch sử đơn hàng mô phỏng.
-- Giao diện responsive cho desktop, tablet và mobile.
-- Deploy tự động lên GitHub Pages bằng GitHub Actions.
-
-## Công nghệ sử dụng
-
-- [React](https://react.dev/) — xây dựng giao diện component-based.
-- [Vite](https://vite.dev/) — công cụ phát triển và build frontend.
-- [React Router](https://reactrouter.com/) — điều hướng giữa các trang.
-- React Context API — quản lý giỏ hàng.
-- CSS thuần — thiết kế giao diện và responsive.
-- `localStorage` — lưu dữ liệu giỏ hàng và đơn hàng mô phỏng.
-
-## Yêu cầu môi trường
-
-- Node.js 20 trở lên.
-- npm đi kèm Node.js.
-
-Kiểm tra phiên bản đã cài:
-
-```bash
-node --version
-npm --version
-```
+| Pattern | Vị trí | Vai trò |
+| --- | --- | --- |
+| **Repository + Adapter Pattern** | `src/services/productRepository.js`, `src/services/storageService.js` | Tách biệt tầng lấy dữ liệu API (FastAPI) khỏi UI, chuyển đổi DTO `snake_case` → Domain Model và tự động fallback sang bộ dữ liệu local khi deploy tĩnh. |
+| **Strategy Pattern** | `src/domain/pricingStrategy.js`, `src/domain/productFilters.js` | Đóng gói thuật toán tính mã giảm giá (`LUMA10`), miễn phí vận chuyển (`1.000.000₫`) và sắp xếp/lọc sản phẩm. |
+| **Factory Pattern** | `src/domain/orderFactory.js` | Chuẩn hóa việc khởi tạo đơn hàng và sinh mã đơn `#LW-2026-XXXX`. |
+| **Flux / Reducer + Provider Composition** | `src/state/CartContext.jsx`, `WishlistContext.jsx`, `OrderContext.jsx`, `UIContext.jsx`, `StoreProvider.jsx` | Tách biệt trạng thái theo từng miền nghiệp vụ, quản lý giỏ hàng bằng `useReducer` để tránh re-render không cần thiết. |
+| **Custom Hooks Pattern** | `src/hooks/useProducts.js`, `src/hooks/useEscapeKey.js` | Tái sử dụng logic bất đồng bộ và hành vi truy cập bàn phím (đóng Drawer/Modal bằng phím `Esc`). |
 
 ## Cài đặt và chạy local
 
-Clone repository:
-
-```bash
-git clone https://github.com/codekhongdo/lumawear-store.git
-cd lumawear-store
-```
-
-Cài đặt dependency:
-
 ```bash
 npm install
-```
-
-Khởi động development server:
-
-```bash
 npm run dev
 ```
 
-Mở URL được hiển thị trong terminal, thường là:
-
-```text
-http://localhost:5173/
-```
-
-## Các lệnh npm
-
-| Lệnh | Mô tả |
-| --- | --- |
-| `npm run dev` | Chạy development server với Vite |
-| `npm run build` | Build phiên bản production vào thư mục `dist/` |
-| `npm run preview` | Chạy thử bản build production local |
-
-Build và preview production:
+Build production (tương thích sẵn GitHub Pages qua `.github/workflows/deploy.yml`):
 
 ```bash
 npm run build
 npm run preview
 ```
-
-## Cấu trúc dự án
-
-```text
-lumawear-store/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml       # Workflow build và deploy GitHub Pages
-├── src/
-│   ├── data.js              # Dữ liệu danh mục và sản phẩm
-│   ├── main.jsx             # Component, router và entry point
-│   └── styles.css           # CSS giao diện và responsive
-├── index.html               # HTML entry point
-├── package.json             # Scripts và dependencies
-├── package-lock.json        # Khóa phiên bản dependency
-├── vite.config.js           # Cấu hình Vite và base path
-└── README.md                # Tài liệu dự án
-```
-
-## Deploy lên GitHub Pages
-
-Dự án sử dụng workflow tại `.github/workflows/deploy.yml`.
-
-Mỗi lần push lên branch `main`, GitHub Actions sẽ:
-
-1. Checkout source code.
-2. Cài Node.js và dependencies.
-3. Chạy `npm run build`.
-4. Upload thư mục `dist/`.
-5. Deploy artifact lên GitHub Pages.
-
-Vite được cấu hình base path cho repository:
-
-```javascript
-base: '/lumawear-store/'
-```
-
-Để bật Pages trong repository, vào **Settings → Pages → Source** và chọn **GitHub Actions**.
-
-## Backend FastAPI + PostgreSQL local
-
-Backend nằm trong `backend/`, cung cấp CRUD sản phẩm tại `http://127.0.0.1:8000/api/products`. Cài PostgreSQL, tạo database `lumawear`, sao chép `backend/.env.example` thành `backend/.env`, rồi chạy:
-
-```powershell
-python -m venv backend\.venv
-backend\.venv\Scripts\python.exe -m pip install -r backend\requirements.txt
-backend\.venv\Scripts\python.exe backend\seed.py
-backend\.venv\Scripts\python.exe -m uvicorn app.main:app --app-dir backend --reload --port 8000
-```
-
-Frontend đọc URL API từ `VITE_API_URL` và mặc định dùng `http://127.0.0.1:8000/api`. Swagger: `http://127.0.0.1:8000/docs`.
-
-## Lưu ý
-
-- Đây là frontend demo, chưa có backend hoặc cơ sở dữ liệu.
-- Checkout chỉ mô phỏng đơn hàng COD, không xử lý thanh toán thật.
-- Dữ liệu giỏ hàng và đơn hàng được lưu trong trình duyệt hiện tại.
-- Khi deploy dưới subpath GitHub Pages, không xóa cấu hình `base` trong `vite.config.js`.
-
-## License
-
-Dự án phục vụ mục đích học tập và demo frontend.
